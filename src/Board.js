@@ -79,12 +79,25 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+
+      var rowArray = this.rows()[rowIndex];    //gives array
+      var spotsOccupied = rowArray.reduce(function(accumulator, item) {
+        return accumulator + item;
+      }, 0);
+
+      return spotsOccupied > 1 ? true : false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var board = this.rows();
+
+      for (var i = 0; i < board.length; i++) {
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -94,12 +107,51 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      // return false; // fixme
+      var board = this.rows();
+      var testBoard = board.map((rows) => {
+        return rows.slice(0);
+      });
+      // console.log(testBoard);
+
+      for (var x = 0; x < board.length; x++) {
+        for (var y = 0; y < board.length; y++) {
+          testBoard[y][x] = board[x][y];
+        }
+      }
+
+      // console.log('testboard', JSON.stringify(testBoard));
+      // console.log('board', JSON.stringify(board));
+      var colArray = testBoard[colIndex];
+      var spotsOccupied = colArray.reduce(function(accumulator, item) {
+        return accumulator + item;
+      }, 0);
+
+      return spotsOccupied > 1 ? true : false;
+
+
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      // return false; // fixme
+      var board = this.rows();
+      var testBoard = board.map((rows) => {
+        return rows.slice(0);
+      });
+
+      for (var x = 0; x < board.length; x++) {
+        for (var y = 0; y < board.length; y++) {
+          testBoard[y][x] = board[x][y];
+        }
+      }
+
+      for (var i = 0; i < testBoard.length; i++) {
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
