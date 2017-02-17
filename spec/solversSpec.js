@@ -1,41 +1,39 @@
 describe('solvers', function() {
   window.displayBoard = function() {};
 
-  // describe('findNRooksSolution()', function() {
+  describe('findNRooksSolution()', function() {
 
-  //   it('finds a valid solution for n of 1-8', function() {
-  //     _.range(1, 5).map(function(n) {
-  //       var solutionBoard = new Board(findNRooksSolution(n));
-  //       var numPieces = _.reduce(solutionBoard.rows(), function(memo, row) {
-  //         return memo + _.reduce(row, function(memo, col) {
-  //           return memo + col;
-  //         }, 0);
-  //       }, 0);
+    it('finds a valid solution for n of 1-8', function() {
+      _.range(1, 5).map(function(n) {
+        var solutionBoard = new Board(findNRooksSolution(n));
+        var numPieces = _.reduce(solutionBoard.rows(), function(memo, row) {
+          return memo + _.reduce(row, function(memo, col) {
+            return memo + col;
+          }, 0);
+        }, 0);
 
-  //       expect(solutionBoard.get('n')).to.equal(n);
-  //       expect(numPieces).to.equal(n);
-  //       expect(solutionBoard.hasAnyRooksConflicts()).to.be.equal(false);
-  //     });
-  //   });
+        expect(solutionBoard.get('n')).to.equal(n);
+        expect(numPieces).to.equal(n);
+        expect(solutionBoard.hasAnyRooksConflicts()).to.be.equal(false);
+      });
+    });
 
-  // });
+  });
 
-  // describe('countNRooksSolutions()', function() {
+  describe('countNRooksSolutions()', function() {
 
-  //   it('finds the number of valid solutions for n of 1-8', function() {
-  //     _.range(1, 8).map(function(n) {
-  //       var solutionUs = [];
-  //       var solutionCount = countNRooksSolutions(n);
-  //       var expectedSolutionCount = [1, 1, 2, 6, 24, 120, 720, 5040, 40320][n];
-  //       solutionUs.push(solutionCount);
-  //       expect(solutionCount).to.be.equal(expectedSolutionCount);
-  //         console.log('output')
-  //         console.log(JSON.stringify(solutionUs));
-  //     });
+    it('finds the number of valid solutions for n of 1-8', function() {
+      _.range(1, 8).map(function(n) {
+        var solutionUs = [];
+        var solutionCount = countNRooksSolutions(n);
+        var expectedSolutionCount = [1, 1, 2, 6, 24, 120, 720, 5040, 40320][n];
+        solutionUs.push(solutionCount);
+        expect(solutionCount).to.be.equal(expectedSolutionCount);
+      });
 
-  //   });
+    });
 
-  // });
+  });
 
   describe('findNQueensSolution()', function() {
 
