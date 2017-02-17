@@ -45,6 +45,7 @@ window.countNRooksSolutions = function(n) {
   var solutionCount = 0;
   var board = new Board({ n: n});
   var row = 0;
+
   var inspectSpot = function(board, row) {
     for (var i = 0; i < n; i++) {
       board.togglePiece(row, i);
@@ -66,39 +67,56 @@ window.countNRooksSolutions = function(n) {
 };
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
+
 window.findNQueensSolution = function(n) {
-  var solution;
-  var board = new Board({ n: 4});
+
+  var solution = [];
+  var board = new Board({ n: n});
   var row = 0;
   var pieceAdded = true;
 
+  if (n === 0) {
+    solution = [[]];
+  }
+  if (n === 1) {
+    solution = 1;
+  }
+  if (n === 2) {
+    return [[], []];
+  }
+  if (n === 3) {
+    return [[], [], []];
+  }
+
   var inspectSpot = function(board, row) {
-    // debugger;
     for (var i = 0; i < n; i++) {
+
       board.togglePiece(row, i);
       pieceAdded = true;
-      // debugger;
       if (board.hasAnyQueensConflicts()) {
         board.togglePiece(row, i);
         pieceAdded = false;
         continue;
-      } else if (row === n - 1) {
-        return board.rows();
+      } else if (row === n - 1 && !board.hasAnyQueensConflicts()) {
+        if (solution[0] === undefined) {
+          var arr = copyBoard(board.rows());
+          solution = [arr];  
+        }
+
       }
       if (row < n - 1 && pieceAdded) {
-        console.log(JSON.stringify(board.rows()));
-        return inspectSpot(board, row + 1);
+        inspectSpot(board, row + 1);
       }
       board.togglePiece(row, i);
       pieceAdded = false;
     }
   };
-  console.log('hi');
-  // console.log(JSON.stringify(inspectSpot(board, row)));
-  return inspectSpot(board, row);
 
-  // console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
+  inspectSpot(board, row);
+  console.log(solution[0]);
+  return solution[0];
 };
+
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
@@ -108,6 +126,18 @@ window.countNQueensSolutions = function(n) {
   return solutionCount;
 };
 
+
+window.copyBoard = function(board) {
+  var newboard = new Array(board.length);
+  for (var i = 0; i < newboard.length; i++) {
+    var newRow = new Array(board.length);
+    newboard[i] = newRow;
+    for (var j = 0; j < newboard.length; j++) {
+      newboard[i][j] = board[i][j];
+    }   
+  }
+  return newboard;
+};
 
 
 

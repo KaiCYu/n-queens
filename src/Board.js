@@ -245,17 +245,17 @@
     },
 
     /*--------------------  End of Helper Functions  ---------------------*/
-    // copyBoard: function(board) {
-    //   var newboard = new Array(board.length);
-    //     for (var i = 0; i < newboard.length; i++) {
-    //       var newRow = new Array(board.length);
-    //       newboard[i] = newRow;
-    //       for (var j = 0; j < newboard.length; j++) {
-    //         newboard[i][j] = board[i][j];
-    //       }   
-    //     }
-    //   return newboard;
-    // }
+    copyBoard: function(board) {
+      var newboard = new Array(board.length);
+        for (var i = 0; i < newboard.length; i++) {
+          var newRow = new Array(board.length);
+          newboard[i] = newRow;
+          for (var j = 0; j < newboard.length; j++) {
+            newboard[i][j] = board[i][j];
+          }   
+        }
+      return newboard;
+    }
 
   });
 
@@ -269,42 +269,3 @@
 
 }());
 
-
-// countNRooksSolutions = function(n) {
-//     debugger;
-//   n = 2;
-//   var solutionCount = 0;
-//   var board = new Board([[0,0],[0,0]]);
-//   board.rooks = 0;
-
-//   var checkNextRow = function (board) {
-//     for (var i = 0; i < n; i++) {
-//       //copy board
-//       var copy = new Board(board.rows());
-//       //toggle copy @ board.rooks and colIndex, increment board.rooks
-//       copy.togglePiece(board.rooks, i);
-//       board.rooks++;
-
-//       //if does NOT have rook conflict
-//       if (!board.hasAnyRooksConflicts()) {
-//         //if board.rooks === n
-//         if (board.rooks === n) {
-//           //incremnet solutionCount
-//           solutionCount++;
-//           return;
-//         } else {
-//           //call checkNextRow(copy)
-//           checkNextRow(copy);
-//         }
-//       } else {
-//         return;
-//       }
-//       return;
-//     }
-//   };
-//   checkNextRow(board);
-//   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
-//   return solutionCount;
-// };
-
-// countNRooksSolutions(2);
